@@ -63,8 +63,9 @@ def init(ctx, safeeyes_config, plugin_config):
     Initialize the screensaver plugin.
     """
     global tray_icon_path
+    global auto_pause
     tray_icon_path = os.path.join(plugin_config['path'], "resource/pause.png")
-
+    auto_pause = plugin_config['auto_pause']
 
 def get_tray_action(break_obj):
     """
@@ -76,3 +77,13 @@ def get_tray_action(break_obj):
                                 tray_icon_path,
                                 Gtk.STOCK_MEDIA_PAUSE,
                                 lambda: __pause_players(players))
+
+def on_start_break(break_obj):
+    """
+    Invoke auto pause if enabled.
+    """
+    if auto_pause:
+        players = __active_players()
+
+        if players:
+            __pause_players(players)
