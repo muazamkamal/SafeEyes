@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-Media Control plugin lets users to pause currntly playing media player from the break screen.
+Media Control plugin lets users to pause currently playing media player from the break screen.
 """
 
 import logging
@@ -60,12 +60,13 @@ def __pause_players(players):
 
 def init(ctx, safeeyes_config, plugin_config):
     """
-    Initialize the screensaver plugin.
+    Initialize the mediacontrol plugin.
     """
     global tray_icon_path
     global auto_pause
     tray_icon_path = os.path.join(plugin_config['path'], "resource/pause.png")
     auto_pause = plugin_config['auto_pause']
+
 
 def get_tray_action(break_obj):
     """
@@ -77,6 +78,7 @@ def get_tray_action(break_obj):
                                 tray_icon_path,
                                 Gtk.STOCK_MEDIA_PAUSE,
                                 lambda: __pause_players(players))
+
 
 def on_start_break(break_obj):
     """
